@@ -1,0 +1,150 @@
+@import '../../assets/scss/common.scss';
+
+page{
+    height: 100%;
+}
+
+.page-view{
+    display: flex;
+    flex-direction: column;
+    .page-container{
+        flex:1;
+    }
+}
+
+.page-header{
+    background-color: #fff;
+    padding-bottom: 20px;
+
+    $size : 80px;
+    .greetings{
+        overflow: hidden;
+        .user-avatar{
+            float: left;
+            width: $size;
+        }
+    
+        .greetings-text{
+            float: left;
+            line-height: $size;
+            margin-left: 20px;
+            color: $color-brand;
+            font-weight: bold;
+        }
+    }
+    
+    .near-site{
+        $size : 60px;
+        line-height: $size;
+        border-radius: $size / 2;
+        background-color: #ececec;
+        color: #666;
+        font-size: 24px;
+        padding:0 18px;
+        white-space: nowrap;
+
+        .wrap{
+            $size:30px;
+            position: relative;
+            padding-left: $size + 8px;
+            .location-icon{
+                position: absolute;
+                left: 0;
+                width: $size;
+            }
+        }
+    }
+}
+
+
+
+
+.bottom-controls{
+    width: 80%;
+    position: absolute;
+    bottom: 150px;
+}
+
+.scan-button{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: $color-brand;
+    border-radius: 50%;
+    box-shadow: 1px 2px 10px 3px $color-brand;
+}
+
+.scan-icon{
+    display: block;
+    width: 50px;
+    margin:auto;
+}
+
+.scan-text{
+    margin-top: 10px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.input-deviceno, .user-center{
+    width: 100px;
+    height: 100px;
+    background:#fff;
+    border-radius: 50%;
+    margin: auto;
+    position: relative;
+}
+
+.input-icon, .user-icon{
+    display: block;
+    width: 50px;
+    color: #bfbfbf;
+}
+
+.left-controls{
+    position: absolute;
+    left: $space;
+    bottom: 400px;
+
+    .item{
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: #fff;
+        position: relative;
+
+        .icon{
+            position: absolute;
+            width: 50px;
+        }
+    }
+}
+
+.device-detail{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    z-index: 2;
+
+    .wrap{
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 30px 30px;
+        position: relative;
+        .site-name{
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .navigation{
+            position: absolute;
+            right: 30px;
+            white-space: nowrap;
+            .nav-icon{
+                width: 60px;
+                margin: auto;
+            }
+        }
+    }
+}

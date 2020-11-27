@@ -1,0 +1,73 @@
+@import '../../assets/scss/common.scss';
+
+@import "~taro-ui/dist/style/components/divider.scss";
+
+.page-view{
+    background-color: $page-background-color;
+    padding-top: 60px;
+}
+
+.swiper{
+    height: 566px;
+    width: 80%;
+    margin: auto;
+    box-shadow: 2px 2px 20px 3px rgb(224, 224, 224);
+}
+
+.swiper-item{
+    overflow:visible;
+}
+
+.indicator{
+    font-size: 0;
+    text-align: center;
+    .dot{
+        display: inline-block;
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.3);
+        margin-left: 15px;
+        &:first-child{
+            margin-left: 0;
+        }
+
+        &.active{
+            transform: scale(1.2);
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    }
+}
+
+.order-card{
+    background-color: #fff;
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 2px 2px 20px 3px rgb(224, 224, 224);
+    padding: 0 30px 40px 30px;
+}
+
+.charge-time{
+    text-align: center;
+    .number{
+        font-size: 50px;
+        font-weight: bold;
+    }
+
+    .unit{
+        font-size: 24px;
+        color: #999;
+    }
+}
+
+.order-info{
+    margin-top: 40px;
+    line-height: 50px;
+}
+
+.confirm-button{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+}

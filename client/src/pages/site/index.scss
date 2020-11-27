@@ -1,0 +1,52 @@
+
+
+.site-card{
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 2px 2px 20px 3px rgb(230, 230, 230);
+    padding: 30px 30px;
+    position: relative;
+
+    .site-name{
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .site-address{
+        position: relative;
+        padding-left: 35px;
+        .icon{
+            position: absolute;
+            width: 30px;
+            left: 0;
+        }
+    }
+
+    .navigation{
+        position: absolute;
+        right: 30px;
+        white-space: nowrap;
+        .nav-icon{
+            width: 60px;
+            margin: auto;
+        }
+    }
+}
+
+.container{
+    transform: translateY(-100px);
+}
+
+.device-row{
+    border-bottom: 2px solid #f3f3f3;
+    padding-bottom: 20px;
+    margin-top: 30px;
+
+    &:first-child{
+        margin-top: 0;
+    }
+
+    &:last-child{
+        border-bottom: none;
+    }
+}

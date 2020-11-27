@@ -1,0 +1,41 @@
+@import '../../../assets/scss/common.scss';
+
+$h : 90px;
+
+.pay-option{
+    line-height: $h;
+    border-bottom: 1px solid $page-background-color;
+
+    &:last-child{
+        border-bottom: none;
+    }
+
+    &.link{
+        position: relative;
+        &::after{
+            content: '';
+            position: absolute;
+            height: 16px;
+            width: 16px;
+            border: 2px solid #a9aaab;
+            right: 0;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            border-left: none;
+            border-top: none;
+        }
+
+
+        .charge-tips{
+            position: absolute;
+            top: 50%;
+            right: 35px;
+            transform: translateY(-50%);;
+        }
+    }
+    
+}
+
+.radio{
+    transform:scale(0.7);
+}

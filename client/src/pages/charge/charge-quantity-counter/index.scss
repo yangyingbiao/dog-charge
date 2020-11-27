@@ -1,0 +1,86 @@
+@import '../../../assets/scss/common.scss';
+
+.charge-quantity{
+    $size : 100px;
+
+    .name, .unit{
+        line-height: $size;
+    }
+
+    .counter{
+        
+        width: $size * 3;
+        display: flex;
+        
+        $border-color:#eaeaea;
+        .btn{
+    
+            @mixin btn($color : #3497fd) {
+                position: absolute;
+                content : '';
+                width: 40px;
+                height: 2PX;
+                background-color: $color;
+                top: 50%;
+                left: 50%;
+            }
+    
+            position: relative;
+            flex: 1;
+            border:2px solid $border-color;
+            
+            $radius : 10px;
+    
+            &:first-of-type{
+                border-radius:$radius 0 0 $radius;
+                &::before{
+                    @include btn;
+                    @include translate(-50%, -50%);
+                }
+            }
+    
+            &:last-of-type{
+                border-radius:0 $radius $radius 0;
+    
+                &::before{
+                    @include btn;
+                    @include translate(-50%, -50%);
+                }
+    
+                &::after{
+                    @include btn;
+                    transform: translate(-50%, -50%) rotate(90deg);
+                }
+            }
+    
+            &.disabled{
+                &:first-of-type{
+                    &::before{
+                        background-color: $border-color;
+                    }
+                }
+    
+                &:last-of-type{
+                    &::before{
+                        background-color: $border-color;
+                    }
+                    &::after{
+                        background-color: $border-color;
+                    }
+                }
+            }
+        }
+    
+        .value{
+            width: $size;
+            height: $size;
+            border:none;
+            border: 2px solid $border-color;
+            border-left: none;
+            border-right: none;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+        }
+    }
+}

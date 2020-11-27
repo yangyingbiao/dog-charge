@@ -1,0 +1,14 @@
+.container{
+    width: 70%;
+    margin: auto;
+    padding-top: 80px;
+
+    .input{
+        border-bottom: 2px solid #f3f3f3;
+        height: 100px;
+        font-size: 40px;
+        color: #333;
+    }
+}
+
+@import "~taro-ui/dist/style/components/button.scss";

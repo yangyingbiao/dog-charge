@@ -1,0 +1,120 @@
+@import '../../assets/scss/common.scss';
+
+@import "~taro-ui/dist/style/components/list.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+
+$bottom-height : 120px;
+
+.page-view{
+    padding-bottom: $bottom-height + 20px;
+}
+
+.blank{
+  background-color: $page-background-color;
+  height: 10px;
+}
+
+.row{
+    padding:20rpx $space 20rpx $space;
+    border-top: 2px solid $page-background-color;
+}
+@media screen {
+    .port-option-list{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+
+        @media screen and (max-width:740px) {
+            grid-gap: 20px;
+        }
+
+        .port-option{
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+            background-color: #fff;
+            box-shadow: 2px 2px 20px 3px rgb(233, 233, 233);
+            margin: auto;
+            border-radius: 10px;
+            position: relative;
+        
+            &.selected{
+                background-color: $color-primary;
+                box-shadow: none;
+                
+                .wrap{
+                    color: #fff;
+                }
+            }
+
+            &.disabled{
+                background-color: rgb(250, 250, 250);
+                box-shadow: none;
+                .wrap{
+                    color: rgb(153, 153, 153);
+                }
+            }
+
+            .wrap{
+                position: absolute;
+                white-space: nowrap;
+                text-align: center;
+                font-size: 36px;
+                font-weight: bold;
+            }
+            
+        }
+
+        .port-status{
+            font-size: 24px;
+            text-align: center;
+            margin-top: 6px;
+            color: #999;
+
+            &.free{
+                color: rgb(16, 134, 0);
+            }
+
+            &.charging{
+                color: #ee2d2d;
+            }
+            
+        }
+    }
+
+}
+
+
+.footer-nav{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 3;
+    display: flex;
+    .amount{
+        line-height: $bottom-height;
+        flex: 1;
+        position: relative;
+        &::before{
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 2px;
+            background-color: $page-background-color;;
+        }
+    }
+
+    .confirm-button{
+        width: $bottom-height * 1.5;
+        line-height: $bottom-height;
+
+        background-color: $color-primary;
+        color: #fff;
+        text-align: center;
+
+    }
+}
+

@@ -1,0 +1,145 @@
+
+@import './assets/scss/common.scss';
+
+view, image, navigator, text{
+  box-sizing: border-box;
+  font-size: 28px;
+  color: #333;
+}
+
+/* Custom Theme */
+Image{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+@import "~taro-ui/dist/style/index.scss";
+
+page{
+    font-size: 28px;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.center {
+left: 50%;
+@include translate(-50%, 0);
+}
+.middle {
+top: 50%;
+@include translate(0, -50%);
+}
+.xy {
+left: 50%;
+top: 50%;
+@include translate(-50%, -50%);
+}
+
+.p-l-r{
+    padding-left: $space;
+    padding-right: $space;
+}
+
+.p-l{
+  padding-left: $space;
+}
+
+.m-l-10{
+margin-left: 10px;
+}
+.m-l-20{
+margin-left: 20px;
+}
+.m-l-30{
+margin-left: 30px;
+}
+.m-l-40{
+margin-left: 40px;
+}
+
+.m-t-5{
+  margin-top: 5px;
+  }
+.m-t-8{
+margin-top: 8px;
+}
+
+.m-t-10{
+margin-top: 10px;
+}
+.m-t-20{
+margin-top: 20px;
+}
+.m-t-30{
+margin-top: 30px;
+}
+.m-t-40{
+margin-top: 40px;
+}
+.m-t-60{
+margin-top: 60px;
+}
+
+.l-0{left:0;}
+.r-0{right:0}
+
+.relative{
+position: relative;
+}
+.absolute {
+position: absolute;
+}
+.fixed {
+position: fixed;
+}
+
+.f-28{
+  font-size: 28px;
+}
+
+.f-24{
+    font-size: 24px;
+  }
+  .f-32{
+    font-size: 32px;
+  }
+  .f-36{
+    font-size: 36px;
+  }
+  .f-64{
+    font-size: 64px;
+  }
+
+.font-bold{
+  font-weight: bold;
+}
+.vh-100{height: 100vh;overflow-y: auto;}
+.w-100{width:100% !important;}
+.h-100{height:100% !important;}
+
+.overflow{overflow:hidden;}
+.pull-left{float:left;}
+.pull-right{float:right;}
+
+.text-left{text-align:left !important;}
+.text-center{text-align:center !important;}
+.text-justify{text-align:justify !important;}
+.text-right{text-align:right !important;}
+
+.color-fff{color: #fff !important;}
+.color-333{color: #333 !important;}
+.color-666{color: #666 !important;}
+.color-999{color: #999 !important;}
+.color-primary {color: $color-primary;}
+.color-0ab885{color: #0ab885 !important;}
+.color-0265ff{color: #0265ff !important;}
+.color-bd1c1c{color: #bd1c1c;}
+.color-0d349b{color: #0d349b !important;}
+
+
+
+button[type=primary] {
+  background-color: $color-primary;
+}
