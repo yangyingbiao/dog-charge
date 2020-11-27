@@ -12,6 +12,7 @@ import { RedisModule } from './redis/redis.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { IndexModule } from './controller/index/index.module';
 import { DeviceModule } from './controller/device/device.module';
+import { ChargeModule } from './controller/charge/charge.module';
 
 
 import config from './config'
@@ -41,7 +42,7 @@ import config from './config'
       load : [config]
     }),
     
-  LoginModule, CommonModule, UtilsModule, HttpModule, ModelsModule, RedisModule, IndexModule, DeviceModule],
+  LoginModule, CommonModule, UtilsModule, HttpModule, ModelsModule, RedisModule, IndexModule, DeviceModule, ChargeModule],
   controllers: [AppController],
   providers: [AppService],
 })
