@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RedisService } from 'src/redis/redis.service';
 import { getCurrentTime, random } from 'src/utils/utils.service';
-import { UserService } from '../../model/user/user.service'
+import { UserModelService } from '../../model/user-model/user-model.service'
 import { LoginJwtService } from './login-jwt/login-jwt.service';
 
 @Injectable()
 export class LoginService {
     constructor(
-        private userServiceModel : UserService,
+        private userServiceModel : UserModelService,
         private configService : ConfigService,
         private loginJwt : LoginJwtService,
         private redis : RedisService

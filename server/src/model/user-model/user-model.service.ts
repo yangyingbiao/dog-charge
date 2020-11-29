@@ -1,8 +1,7 @@
-
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import ChargePriceEntity from '../../entity/charge-price'
+import UserEntity from '../../entity/user'
 import { BaseService } from '../base/base.service';
 
 
@@ -10,10 +9,10 @@ import { BaseService } from '../base/base.service';
 
 
 @Injectable()
-export class ChargePriceService extends BaseService<ChargePriceEntity> {
+export class UserModelService extends BaseService<UserEntity> {
     constructor(
-        @InjectRepository(ChargePriceEntity)
-        protected model : Repository<ChargePriceEntity>
+        @InjectRepository(UserEntity)
+        protected model : Repository<UserEntity>
     ) {
         super()
     }

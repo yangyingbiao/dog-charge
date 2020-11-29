@@ -1,10 +1,15 @@
-import React, { useLayoutEffect } from 'react'
+import React from 'react'
 import { View, Text, Swiper, SwiperItem, Button } from '@tarojs/components'
 import { AtDivider } from 'taro-ui'
 
 import './index.scss'
+import Http from '../../http/'
 
-export default (props,a) => {
+export default (props) => {
+    function stopCharge() {
+        let http = new Http()
+        http.post('charge')
+    }
     return (
         <View className='vh-100 page-view'>
             <View id='a'></View>
@@ -52,7 +57,7 @@ export default (props,a) => {
             <View className='text-center m-t-60'>共<Text className='color-primary f-36'> 3 </Text>个订单</View>
 
             <View className='confirm-button p-l-r'>
-                <Button type='primary' hover-class='none' className='f-32'>停止充电</Button>
+                <Button type='primary' hover-class='none' className='f-32' onClick={stopCharge}>停止充电</Button>
             </View>
 
         </View>

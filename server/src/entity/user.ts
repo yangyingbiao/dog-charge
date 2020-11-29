@@ -24,6 +24,12 @@ export default class User {
     unionid : string;
 
     @Column()
+    amount : number;
+
+    @Column()
+    reward_amount : number;
+
+    @Column()
     last_login_time : number;
 
     @Column()

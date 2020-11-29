@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { BaseService } from '../base/base.service';
 
 @Injectable()
-export class DeviceService extends BaseService<DevicetEntity> {
+export class DeviceModelService extends BaseService<DevicetEntity> {
     constructor(
         @InjectRepository(DevicetEntity)
         protected model : Repository<DevicetEntity>

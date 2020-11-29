@@ -1,3 +1,5 @@
+create database dog_charge charset=utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
 drop table if exists `user`;
 create table `user`(
     `user_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -36,15 +38,41 @@ create table `station`(
 ) ENGINE=INNODB COMMENT='设备' AUTO_INCREMENT=901030;
 
 drop table if exists `charge_price`;
-create table `device`(
-`price_id` INT MEDIUMINT PRIMARY KEY AUTO_INCREMENT
+create table `charge_price`(
+`price_id` MEDIUMINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+`unit_price` DECIMAL(4,2) NOT NULL DEFAULT 0 COMMENT '',
+`min_settle_quantity` TINYINT NOT NULL DEFAULT 0 COMMENT '最小结算数量'
 ) ENGINE=INNODB COMMENT='充电价格' AUTO_INCREMENT=901030;
 
 drop table if exists `device`;
 create table `device`(
-`device_id` INT MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+`device_id` MEDIUMINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 `simid` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '流量卡号',
-`merchant_id` INT MEDIUMINT NOT NULL DEFAULT 0 COMMENT '充电站',
-`station_id` INT MEDIUMINT NOT NULL DEFAULT 0 COMMENT '充电站',
-`price_id` INT MEDIUMINT NOT NULL DEFAULT 0 COMMENT '价格套餐'
+`merchant_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '充电站',
+`station_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '充电站',
+`price_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '价格套餐'
 ) ENGINE=INNODB COMMENT='设备' AUTO_INCREMENT=901030;
+
+
+drop table if exists `charge_order`;
+create table `charge_order`(
+`order_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+`order_no` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '订单号',
+`transaction_id` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
+`user_id` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
+`device_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '设备ID',
+`merchat_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '商户ID',
+`station_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '站点ID',
+`unit_price` DECIMAL(4, 2) NOT NULL DEFAULT '' COMMENT '单价多少钱（小时）',
+`min_settle_quantity` TINYINT NOT NULL DEFAULT 0 COMMENT '最小结算数量',
+`charge_quantity` SMALLINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '设置充电多少分钟',
+`amount` DECIMAL(4, 2) NOT NULL DEFAULT '' COMMENT '支付多少钱',
+`consume_quantity` SMALLINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '实际充电多少分钟',
+`consume_amount` SMALLINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '实际消费多少钱',
+`create_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单创建时间',
+`start_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '开始充电时间',
+`end_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '停止充电时间',
+UNIQUE KEY(`order_no`),
+INDEX(`merchant_id`),
+INDEX(`station_id`)
+) ENGINE=INNODB COMMENT='充电订单' AUTO_INCREMENT=901030;

@@ -1,20 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { stringify } from 'querystring';
 import { RedisService } from 'src/redis/redis.service';
-import { DeviceService as DeviceServiceModel } from 'src/model/device/device.service'
-import { MerchantService as MerchantServiceModel } from 'src/model/merchant/merchant.service';
-import { StationService as StationServiceModel } from 'src/model/station/station.service';
-import { ChargePriceService as ChargePriceServiceModel } from 'src/model/charge-price/charge-price.service';
-import { json } from 'express';
+import { DeviceModelService } from 'src/model/device-model/device-model.service'
+import { MerchantModelService } from 'src/model/merchant-model/merchant-model.service';
+import { StationModelService } from 'src/model/station-model/station-model.service';
+import { ChargePriceModelService } from 'src/model/charge-price-model/charge-price-model.service';
 
 
 @Injectable()
 export class DeviceService {
+    
     constructor(
-        private deviceModel : DeviceServiceModel,
-        private merchantModel : MerchantServiceModel,
-        private stationModel : StationServiceModel,
-        private chargePriceModel : ChargePriceServiceModel,
+        private deviceModel : DeviceModelService,
+        private merchantModel : MerchantModelService,
+        private stationModel : StationModelService,
+        private chargePriceModel : ChargePriceModelService,
         private redis : RedisService
     ) {}
 
@@ -27,7 +26,7 @@ export class DeviceService {
             devCacheIsExists = false
             deviceInfo = await this.deviceModel.select({device_id : deviceId})
             if(!deviceInfo) {
-                this.redis.set(deviceKey, this.configService.get('cache_null'), 600)
+                this.redis.set(deviceKey, process.env.cache_null, 600)
                 return null
             }
         }else {

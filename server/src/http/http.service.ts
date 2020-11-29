@@ -1,4 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class HttpService {}
+export class HttpService {
+    post(url, data) {
+        
+    }
+}

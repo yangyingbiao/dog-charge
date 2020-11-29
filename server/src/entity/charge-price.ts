@@ -7,4 +7,7 @@ export default class ChargePrice {
 
     @Column()
     unit_price : number;
+
+    @Column()
+    min_settle_quantity : number;
 }

@@ -6,7 +6,19 @@ export default class Device {
     device_id : number;
 
     @Column()
+    merchant_name : string;
+
+    @Column()
+    merchant_id : number;
+
+    @Column()
     station_name : string;
+
+    @Column()
+    station_id : number;
+
+    @Column()
+    price_id : number;
 
     @Column()
     service_tel : string;
