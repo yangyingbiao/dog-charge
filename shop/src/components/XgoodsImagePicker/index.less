@@ -1,0 +1,91 @@
+@import '~antd/es/style/themes/default.less';
+
+.upload{
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.imageContainer{
+    position: relative;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.placeholder{
+    display: inline-block;
+    vertical-align: top;
+    width: 80px;
+    height: 80px;
+    background-color: #f7f8fa;
+    position: relative;
+    cursor: pointer;
+
+    .icon{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.addImageGroupForm{
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+    left: 0;
+    display: flex;
+    align-items: center;
+    width: 350px;
+}
+
+.container{
+    display: flex;
+    margin-top: 15px;
+    .aside{
+        width: 100px;
+        .item{
+            margin-top: 5px;
+            &:first-child{
+                margin-top: 0;
+            }
+        }
+    }
+
+    .main{
+        margin-left: 20px;
+        flex: 1;
+        .images{
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(5, 1fr);
+
+            .item{
+                position: relative;
+                cursor: pointer;
+
+                &.selected{
+                    border: 2px solid @primary-color;
+                    .selectedNo{
+                        display: block;
+                    }
+                }
+
+                .selectedNo{
+                    display: none;
+                    position: absolute;
+                    width: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    right: 0;
+                    top: 0;
+                    z-index: 1;
+                    color: #fff;
+                    background-color: @primary-color;
+                    //border-bottom-left-radius: 10px;
+                }
+            }
+        }
+        
+    }
+}

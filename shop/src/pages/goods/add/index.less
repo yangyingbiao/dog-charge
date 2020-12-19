@@ -1,0 +1,100 @@
+@import '~antd/es/style/themes/default.less';
+
+.main {
+  width: 100%;
+  background: @component-background;
+}
+
+.moduleLabel{
+  width: 100px;
+}
+
+.ctrRow{
+  width: 500px;
+}
+
+.sku-box{
+  @color : #e5e5e5;
+  border: 1px solid @color;
+  padding: 10px;
+}
+
+.skuSection{
+  position: relative;
+  .rmSkuSection{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    display: none;
+    z-index: 2;
+  }
+
+  &:hover{
+    .rmSkuSection{
+      display: block;
+    }
+  }
+}
+
+.rcSku {
+  .sku-box;
+
+  .title {
+    background: #f8f8f8;
+    padding: 10px;
+
+    .formItem{
+      margin-bottom: 0;
+    }
+    
+    .skuName{
+      width: 200px;
+    }
+
+    .addPicCheckbox{
+      padding-left: 55px;
+      margin-top: 10px;
+    }
+  }
+
+  .value{
+    padding: 10px;
+    font-size: 0;
+    .skuValue{
+      display: inline-block;
+      font-size: 14px;
+      width: 100px;
+      margin:0 10px 10px 0;
+      position: relative;
+
+      &:hover {
+        .rmSkuValue{
+          display: block;
+        }
+      }
+
+      .rmSkuValue{
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        transform: translate(50%, -50%);
+      }
+    }
+  }
+
+}
+
+.skuDetail{
+  .sku-box;
+
+  .td, .th{
+    padding: 10px 10px;
+  }
+
+  .th{
+    
+  }
+}
