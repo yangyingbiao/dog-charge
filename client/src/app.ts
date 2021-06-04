@@ -56,7 +56,7 @@ class App extends Component {
     Taro.login({
       success : res => {
         if (res.code) {
-          
+          this.login({code : res.code})
         }
       }
     })

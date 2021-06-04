@@ -15,8 +15,9 @@ export default () => ({
     },
 
     wx : {
-        appid : '',
-        mchid : ''
+        appid : 'wxa3a63a716befc49e',
+        mchid : '1496527852',
+        secret : '653f7655fe8acbe2c83755d47e34b81d'
     }
 
   });

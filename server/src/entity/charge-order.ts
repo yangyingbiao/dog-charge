@@ -18,7 +18,7 @@ export default class ChargeOrder {
     device_id : number;
 
     @Column()
-    merchat_id : number;
+    merchant_id : number;
 
     @Column()
     station_id : number;

@@ -8,7 +8,7 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 export class BaseService<T> {
     protected model : any;
 
-    async insert(data : {[k in keyof T] : T[k]}) : Promise<number | null> {
+    async insert(data : {[k in keyof T]? : T[k]}) : Promise<number | null> {
         let res = await this.model.insert(data)
         let raw = res.raw
         if(raw && raw.affectedRows == 1) {

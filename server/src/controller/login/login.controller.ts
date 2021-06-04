@@ -1,47 +1,46 @@
 import { Body, Controller, HttpService, Post, Request, UseGuards } from '@nestjs/common';
-import { request } from 'express';
+import { ConfigService } from '@nestjs/config';
 import AuthGuard from 'src/guard/auth';
 import { UtilsService } from '../../utils/utils.service';
 import { LoginService } from './login.service';
 
 @Controller('login')
 export class LoginController {
-    constructor(private loginService : LoginService) {}
+    constructor(
+        private loginService : LoginService,
+        private configService : ConfigService
+    ) {}
 
     @Post()
     async login(@Body() params) {
-        let code:string = params.code
-        if(!code) {
-            return UtilsService.errorResponse()
-        }
-        
-        let http = new HttpService()
-        let result = {
-            status : 200,
-            
-            data : {
-                errcode : 0,
-                session_key: 'KIZgpL6E3MkVatJDfYCaPQ==',
-            openid: 'o-64P5fHXRh-Go3Q3Wn1RIbj0_Rw',
-            unionid: 'ogK-Awzoci-l-rw5S8UT3Isvb72Q'
+        try {
+            let code:string = params.code
+            if(!code) {
+                return UtilsService.errorResponse()
             }
-        }//await http.get('https://api.weixin.qq.com/sns/jscode2session', {params : {js_code : code, appid : 'wxa3a63a716befc49e', secret : '653f7655fe8acbe2c83755d47e34b81d', grant_type : 'authorization_code'}}).toPromise()
-        if(result && result.status == 200 && result.data) {
-            let data = result.data
-            if(data.hasOwnProperty('errcode') && data.errcode != 0) {
+            
+            let wxConfig = this.configService.get<object>('wx')
+            
+            let http = new HttpService()
+            let result = await http.get('https://api.weixin.qq.com/sns/jscode2session', {params : {js_code : code, appid : wxConfig['appid'], secret : wxConfig['secret'], grant_type : 'authorization_code'}}).toPromise()
+            if(result && result.status == 200 && result.data) {
+                let data = result.data
+                if(data.hasOwnProperty('errcode') && data.errcode != 0) {
+                    return UtilsService.errorResponse('登录失败')
+                }
+
+                let res = await this.loginService.login(data.openid, data.session_key, data.unionid)
+
+                if(!res) return UtilsService.errorResponse('登录失败')
+                
+                return UtilsService.successResponse(res)
+
+            }else {
                 return UtilsService.errorResponse('登录失败')
             }
-
-            let res = await this.loginService.login(data.openid, data.session_key, data.unionid)
-
-            
-
-            return res
-
-        }else {
-            return UtilsService.errorResponse('登录失败')
+        } catch (error) {
+            return UtilsService.errorResponse(error.message)
         }
-
     }
 
     @Post('refresh')

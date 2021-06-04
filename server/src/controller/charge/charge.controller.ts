@@ -2,15 +2,19 @@ import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import AuthGuard from 'src/guard/auth';
 import { RedisService } from 'src/redis/redis.service';
 import { UtilsService } from 'src/utils/utils.service';
+import { ChargeService } from './charge.service';
 
 @Controller('charge')
 //@UseGuards(AuthGuard)
 export class ChargeController {
     constructor(
-        private redis : RedisService
+        private redis : RedisService,
+        private chargeService : ChargeService
     ) {}
     @Post()
     async index(@Body() params : {deviceId : number | string, quantity : number | string, amount : number | string, priceId : number | string, key : string}) {
+        this.chargeService.charge(1, 1,1,1,1,1)
+        return '3333'
         try {
             let deviceId = Number(params.deviceId)
             if(isNaN(deviceId) || deviceId <= 0) return UtilsService.errorResponse()

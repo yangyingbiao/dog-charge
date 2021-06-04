@@ -27,40 +27,35 @@ export class LoginService {
     }
 
     async login(openid : string, session_key : string, unionid? : string) : Promise<object | null> {
-        try {
-            let currentTime = getCurrentTime()
-            let user = await this.userServiceModel.select({openid : openid}, ['user_id', 'unionid', 'avatar', 'nickname', 'source'])
-            if(!user) { //第一次
-                let newUserData = {openid, session_key, register_time : currentTime, source : 1}
-                if(unionid) {
-                    newUserData = Object.assign({unionid : unionid}, newUserData)
-                }
-                let userId = await this.userServiceModel.insert(newUserData)
-                if(!userId) return null
-
-                user = {user_id : userId, source : newUserData.source}
-
-            }else {
-                let updateUserData = {last_login_time : currentTime, session_key}
-                if(unionid && !user.unionid) {
-                    updateUserData = Object.assign({unionid : unionid}, updateUserData)
-                }
-                
-                let changeRows = await this.userServiceModel.update({user_id : user.user_id}, updateUserData)
-                if(changeRows == 0) null
-
-                delete user.unionid
+        let currentTime = getCurrentTime()
+        let user = await this.userServiceModel.select({openid : openid}, ['user_id', 'unionid', 'avatar', 'nickname', 'source'])
+        if(!user) { //第一次
+            let newUserData = {openid, session_key, register_time : currentTime, source : 1}
+            if(unionid) {
+                newUserData = Object.assign({unionid : unionid}, newUserData)
             }
+            let userId = await this.userServiceModel.insert(newUserData)
+            if(!userId) throw 'insert 用户失败'
 
-            let jwtConfig:object = this.configService.get<object>('jwt')
+            user = {user_id : userId, source : newUserData.source}
 
-            this.redis.set('user-' + String(user.user_id), user)
+        }else {
+            let updateUserData = {last_login_time : currentTime, session_key}
+            if(unionid && !user.unionid) {
+                updateUserData = Object.assign({unionid : unionid}, updateUserData)
+            }
             
-            return {...this.createToken(jwtConfig['secret'], jwtConfig['refresh_secret'], user), user}
-        } catch (error) {
-            console.log(error)
-            return null
+            let changeRows = await this.userServiceModel.update({user_id : user.user_id}, updateUserData)
+            if(changeRows == 0) throw '更新用户信息失败'
+
+            delete user.unionid
         }
+
+        let jwtConfig:object = this.configService.get<object>('jwt')
+
+        this.redis.set('user-' + String(user.user_id), user)
+        
+        return {...this.createToken(jwtConfig['secret'], jwtConfig['refresh_secret'], user), user}
     }
 
     async refresh(userId : number, token : string) {

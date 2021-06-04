@@ -52,6 +52,8 @@ export default class Http {
 
         let statusCode = result.statusCode
         if((statusCode >= 200 && statusCode < 300) || statusCode == 304) {
+            let data = result.data
+            data.success = data.code == 200
             return result.data
         }else {
             return {success : false}

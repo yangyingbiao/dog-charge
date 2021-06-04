@@ -74,6 +74,10 @@ export default () => {
 
     let [payChannel, setPayChannel] = useState(1)
 
+    function charge() {
+        http.post('charge', {})
+    }
+
     return (
         <View className='vh-100 page-view'>
             <View className='row f-32'>收费标准：{chargePrice}元/小时</View>
@@ -106,7 +110,7 @@ export default () => {
 
             <View className='footer-nav'>
                 <View className='amount font-bold p-l'>需支付：{chargePrice * chargeQuantity}元</View>
-                <View className='confirm-button'>立即充电</View>
+                <View className='confirm-button' onClick={charge}>立即充电</View>
             </View>
 
         </View>

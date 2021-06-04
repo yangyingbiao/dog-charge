@@ -1,8 +1,10 @@
 export default {
-  pages: ['pages/charging/index',
+  pages: [
+	 'pages/index/index',
     'pages/charge/index',
+    'pages/charging/index',
     'pages/site/index',
-    'pages/index/index',
+    
     
     
     

@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import ChargePrice from 'src/entity/charge-price';
-import { ChargePriceModelService } from 'src/model/charge-price-model/charge-price-model.service';
 import { DeviceModelService } from 'src/model/device-model/device-model.service';
 import { RedisService } from 'src/redis/redis.service';
 import { ChargePriceService } from '../charge-price/charge-price.service';
@@ -23,7 +21,12 @@ export class ChargeService {
         private payment : PaymentService
     ) {}
 
-    async charge(userId : number, payChannel : number, deviceId : number, quantity : number, amount : number, priceId : number) {
+    async charge(userId : number, payType : number, deviceId : number, quantity : number, amount : number, priceId : number) {
+        let prepayId = await this.payment.wxPay('o-64P5fHXRh-Go3Q3Wn1RIbj0_Rw', '545454', 10, '充电', '', )
+        console.log(prepayId)
+        return '34343'
+
+
         let device = await this.redis.get('dev_' + deviceId)
         if(!device) {
             device = await this.deviceModel.select({device_id : deviceId}, ['merchant_id', 'station_id', 'price_id'])
@@ -45,9 +48,9 @@ export class ChargeService {
 
         let order : {[k in keyof ChargeOrderEntity]? : ChargeOrderEntity[k]} = {
             user_id : userId,
-            order_no : '',
+            order_no : String(time),
             device_id : deviceId,
-            merchat_id : device.merchat_id,
+            merchant_id : device.merchant_id,
             station_id : device.station_id,
             unit_price : price.unit_price,
             min_settle_quantity : price.min_settle_quantity,
@@ -61,7 +64,7 @@ export class ChargeService {
         }
 
 
-        if(payChannel == 2) { //余额支付
+        if(payType == 2) { //余额支付
             let wallet = await this.userModel.select({user_id : userId}, ['amount', 'reward_amount'])
             if(wallet['amount'] + wallet['reward_amount'] < amount) throw '余额不足'
         }else {
@@ -71,10 +74,10 @@ export class ChargeService {
 
         
 
-        if(device.merchantId && device.merchantId > 0) {
-            let merchant = await this.merchantService.select(device.merchantId)
-            if(!merchant) throw '商家不存在'
-        }
+        // if(device.merchantId && device.merchantId > 0) {
+        //     let merchant = await this.merchantService.select(device.merchantId)
+        //     if(!merchant) throw '商家不存在'
+        // }
         
     }
 }
